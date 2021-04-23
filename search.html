@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="row row-cols-1 row-cols-md-4 g-4" style="margin-top: 6rem;">
+{% for product in products %}
+  <div class="col">
+  <div class="card h-100 mx-auto my-2 p-2 align-items-center" style="height: 5rem;">
+  <img class="padded card-img-top" width="250" height="230" src="{{ escape(product[2]) }}" alt="{{ escape(product[0]) }}">
+
+    <div class="card-body">
+       <!-- In case title is longer than 15letters, truncate title to first 15 letters. -->
+      <h5 class="card-title">{{ escape(product[0][:30]) }}...</h5>
+      <p class="card-text text-center">Price - &#8377; {{ escape(product[5]) }}</p>
+
+      {% if product[3]!='' %}
+      <p class="card-text text-center">{{ escape(product[3]) }} / 5 &#9734;</p>
+      <p class="card-text text-center">{{ escape(product[4]) }} Ratings</p>
+      {% end %}
+
+      <a href="{{ escape(product[1]) }}" class="btn btn-primary stretched-link d-block">Buy Now</a>
+    </div>
+    </div>
+  </div>
+{% end %}
+
+</div>
+
+
+{% end block %}
