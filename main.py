@@ -2,7 +2,7 @@ from tornado.httpclient import HTTPClient
 import tornado.web
 import tornado.ioloop
 import scraperTornado
-
+import os
 
 class basicRequestHandler(tornado.web.RequestHandler):
     def get(self):
@@ -38,6 +38,7 @@ app = tornado.web.Application([
 
 
 if __name__ == "__main__":
-    app.listen("8882")
+    port = int(os.environ.get("PORT", 8882))
+    app.listen(port)  # port number is a string.
     print("Listening on 8882..")
     tornado.ioloop.IOLoop.current().start()
