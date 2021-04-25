@@ -125,7 +125,7 @@ def searchProductFlipkart(product):
             title = title_link.text
 
         link = 'https://flipkart.com' + title_link.get('href')
-        image = item.find('img', {'class':'_396cs4 _3exPp9'})['src']
+        image = item.find('img', {'class':'_396cs4'})['src']
 
         try:
             price = item.find('div', '_30jeq3').text
