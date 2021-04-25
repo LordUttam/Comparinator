@@ -6,7 +6,7 @@
 {% for product in products %}
   <div class="col">
   <div class="card h-100 mx-auto my-2 p-2 align-items-center" style="height: 5rem;">
-  <img class="padded card-img-top" width="250" height="230" src="{{ escape(product[2]) }}" alt="{{ escape(product[0]) }}">
+  <img class="padded card-img-top" src="{{ escape(product[2]) }}" alt="{{ escape(product[0]) }}">
 
     <div class="card-body">
        <!-- In case title is longer than 15letters, truncate title to first 15 letters. -->
