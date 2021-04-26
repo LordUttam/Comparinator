@@ -20,7 +20,9 @@ headers = {
 
 
 def searchProductAmazon(product):
+    print(product)
     product = product.replace(' ', '+')
+    print(product)
     urlamazon = f'https://www.amazon.in/s?k={product}&ref=nb_sb_noss'
     r = requests.get(urlamazon, headers=headers, timeout=(3.5, 5))
     # time.sleep(1.5)
@@ -63,10 +65,10 @@ def searchProductAmazon(product):
             rating = float(rating)
             # print(rating)
 
-            rating_count = item.find('span', {'class': 'a-size-base', 'dir': 'auto'}).text
-            rating_count = ''.join(c for c in rating_count if c.isdigit())
-            rating_count = int(rating_count)
-            # print(rating_count)
+            review_count = item.find('span', {'class': 'a-size-base', 'dir': 'auto'}).text
+            review_count = ''.join(c for c in review_count if c.isdigit())
+            review_count = int(review_count)
+            # print(review_count)
 
         except AttributeError as attr:
 
@@ -82,10 +84,10 @@ def searchProductAmazon(product):
             ##                print("review not found")
 
             rating = 0
-            rating_count = 0
+            review_count = 0
         # If a product does not have ratings then give it blank value because we can still use it.
 
-        result = (title, link, image, rating, rating_count, price)
+        result = (title, link, image, rating, review_count, price)
         return result
 
     if len(results) == 0:
@@ -102,7 +104,9 @@ def searchProductAmazon(product):
 
 
 def searchProductFlipkart(product):
+    print(product)
     product = product.replace(' ', '%20')
+    print(product)
     urlflipkart = f'https://www.flipkart.com/search?q={product}&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off&sort=relevance'
     r = requests.get(urlflipkart, headers=headers)
     # time.sleep(1)
@@ -117,7 +121,7 @@ def searchProductFlipkart(product):
         title_link = item.find('a', 's1Q9rs')
         # print("title link:",title_link)
 
-        if title_link == None:
+        if title_link is None:
             title_link = item.find('a', '_1fQZEK')
             # print(title_link)
             title = title_link.find('div', '_4rR01T').text
@@ -177,7 +181,9 @@ def searchProductFlipkart(product):
 
 
 def searchProductSnapdeal(product):
+    print(product)
     product = product.replace(" ", "%20")
+    print(product)
     urlsnapdeal = f"https://www.snapdeal.com/search?keyword={product}&santizedKeyword=&catId=&categoryId=0&suggested=false&vertical=&noOfResults=20&searchState=&clickSrc=go_header&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy"
     r = requests.get(urlsnapdeal, headers=headers)
     soup = BeautifulSoup(r.content, 'lxml')

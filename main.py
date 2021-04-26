@@ -13,6 +13,8 @@ class basicRequestHandler(tornado.web.RequestHandler):
 class searchHandler(tornado.web.RequestHandler):
     def get(self):
         product = self.get_argument("prod")
+        # product contains actual space, not '+' or '%20'
+        print("In main.py: ", product)
         #products = product.objects.filter(name__icontains=srh)
         #params = {'products': products, 'search': srh}
         products = scraperTornado.searchProductAmazon(product)+\
