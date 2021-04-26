@@ -20,9 +20,9 @@ headers = {
 
 
 def searchProductAmazon(product):
-    print(product)
+    #print(product)
     product = product.replace(' ', '+')
-    print(product)
+    #print(product)
     urlamazon = f'https://www.amazon.in/s?k={product}&ref=nb_sb_noss'
     r = requests.get(urlamazon, headers=headers, timeout=(3.5, 5))
     # time.sleep(1.5)
@@ -104,9 +104,9 @@ def searchProductAmazon(product):
 
 
 def searchProductFlipkart(product):
-    print(product)
+    #print(product)
     product = product.replace(' ', '%20')
-    print(product)
+    #print(product)
     urlflipkart = f'https://www.flipkart.com/search?q={product}&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off&sort=relevance'
     r = requests.get(urlflipkart, headers=headers)
     # time.sleep(1)
@@ -181,9 +181,9 @@ def searchProductFlipkart(product):
 
 
 def searchProductSnapdeal(product):
-    print(product)
+    #print(product)
     product = product.replace(" ", "%20")
-    print(product)
+    #print(product)
     urlsnapdeal = f"https://www.snapdeal.com/search?keyword={product}&santizedKeyword=&catId=&categoryId=0&suggested=false&vertical=&noOfResults=20&searchState=&clickSrc=go_header&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy"
     r = requests.get(urlsnapdeal, headers=headers)
     soup = BeautifulSoup(r.content, 'lxml')
