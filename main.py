@@ -4,6 +4,7 @@ import tornado.ioloop
 import scraperTornado
 import os
 
+
 class basicRequestHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("home.html")

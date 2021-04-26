@@ -1,5 +1,6 @@
 # Comparinator
-A webapp built using [Tornado Web Framework](https://www.tornadoweb.org/en/stable/) for comparing product data.
+
+[Compare-and-buy](https://compare-and-buy.herokuapp.com/) - a webapp built using [Tornado Web Framework](https://www.tornadoweb.org/en/stable/) for comparing product data. 
 It gathers product data using [Beautiful Soup 4](https://beautiful-soup-4.readthedocs.io/en/latest/) and [requests](https://docs.python-requests.org/en/master/) module.
 
 ## Contributing

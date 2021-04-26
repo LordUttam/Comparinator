@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from time import perf_counter
-from tornado.httpclient import HTTPClient
+# from tornado.httpclient import HTTPClient
 #import sys
 #import asyncio
 
@@ -63,10 +63,10 @@ def searchProductAmazon(product):
             rating = float(rating)
             # print(rating)
 
-            review_count = item.find('span', {'class': 'a-size-base', 'dir': 'auto'}).text
-            review_count = ''.join(c for c in review_count if c.isdigit())
-            review_count = int(review_count)
-            # print(review_count)
+            rating_count = item.find('span', {'class': 'a-size-base', 'dir': 'auto'}).text
+            rating_count = ''.join(c for c in rating_count if c.isdigit())
+            rating_count = int(rating_count)
+            # print(rating_count)
 
         except AttributeError as attr:
 
@@ -82,10 +82,10 @@ def searchProductAmazon(product):
             ##                print("review not found")
 
             rating = 0
-            review_count = 0
+            rating_count = 0
         # If a product does not have ratings then give it blank value because we can still use it.
 
-        result = (title, link, image, rating, review_count, price)
+        result = (title, link, image, rating, rating_count, price)
         return result
 
     if len(results) == 0:
@@ -106,7 +106,7 @@ def searchProductFlipkart(product):
     urlflipkart = f'https://www.flipkart.com/search?q={product}&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off&sort=relevance'
     r = requests.get(urlflipkart, headers=headers)
     # time.sleep(1)
-    soup = BeautifulSoup(r.text, 'html.parser')
+    soup = BeautifulSoup(r.content, 'lxml')
 
     results = soup.find_all('div', style='width:100%')
     if len(results) == 0:
@@ -180,7 +180,7 @@ def searchProductSnapdeal(product):
     product = product.replace(" ", "%20")
     urlsnapdeal = f"https://www.snapdeal.com/search?keyword={product}&santizedKeyword=&catId=&categoryId=0&suggested=false&vertical=&noOfResults=20&searchState=&clickSrc=go_header&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy"
     r = requests.get(urlsnapdeal, headers=headers)
-    soup = BeautifulSoup(r.text, 'html.parser')
+    soup = BeautifulSoup(r.content, 'lxml')
     results = soup.find_all('div', {'class': 'col-xs-6'})
     print(len(results))
 
