@@ -42,7 +42,10 @@ def searchProductAmazon(product):
         try:
             image = item.find('div', 'a-section aok-relative s-image-square-aspect').img['src']
         except AttributeError:
-            image = item.find('div', 'a-section aok-relative s-image-fixed-height').img['src']
+            try:
+                image = item.find('div', 'a-section aok-relative s-image-fixed-height').img['src']
+            except AttributeError:
+                image = item.find('div', 'a-section aok-relative s-image-tall-aspect').img['src']
         try:
             price_parent = item.find('span', 'a-price')
             price = price_parent.find('span', 'a-offscreen').text
@@ -124,12 +127,20 @@ def searchProductFlipkart(product):
         if title_link is None:
             title_link = item.find('a', '_1fQZEK')
             # print(title_link)
-            title = title_link.find('div', '_4rR01T').text
+            try:
+                title = title_link.find('div', '_4rR01T').text
+            except:
+                title_link = item.find('a', 'IRpwTa')
+                title = title_link.text
         else:
             title = title_link.text
 
         link = 'https://flipkart.com' + title_link.get('href')
-        image = item.find('img', {'class':'_396cs4'})['src']
+
+        try:
+            image = item.find('img', {'class':'_396cs4'})['src']
+        except TypeError:
+            image = item.find('img', {'class':'_2r_T1I'})['src']
 
         try:
             price = item.find('div', '_30jeq3').text

@@ -15,10 +15,16 @@ class searchHandler(tornado.web.RequestHandler):
         product = self.get_argument("prod")
         # product contains actual space, not '+' or '%20'
         print("In main.py: ", product)
-        #products = product.objects.filter(name__icontains=srh)
-        #params = {'products': products, 'search': srh}
-        products = scraperTornado.searchProductAmazon(product)+\
-                  scraperTornado.searchProductFlipkart(product)+scraperTornado.searchProductSnapdeal(product)
+
+        amazonlist = scraperTornado.searchProductAmazon(product)
+        flipkartlist = scraperTornado.searchProductFlipkart(product)
+        snapdeallist = scraperTornado.searchProductSnapdeal(product)
+
+        p = [amazonlist,flipkartlist,snapdeallist]
+        products = []
+        for i in p:
+            if i is not None:
+                products += i
 
         try:
             products.sort(key=lambda x: (x[5],-x[4]))  # Sort according to PRICE then if PRICE is same, sort according to decreasing number of ratings.
